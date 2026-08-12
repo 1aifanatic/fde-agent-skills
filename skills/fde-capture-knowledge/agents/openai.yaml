@@ -1,0 +1,4 @@
+interface:
+  display_name: "Capture FDE Knowledge"
+  short_description: "Maintain evidence, terms, conflicts, and gaps"
+  default_prompt: "Use $fde-capture-knowledge to reconcile this evidence into the engagement knowledge base."

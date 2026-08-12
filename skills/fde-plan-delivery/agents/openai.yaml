@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan FDE Delivery"
+  short_description: "Turn approved design into a governed delivery plan"
+  default_prompt: "Use $fde-plan-delivery to turn the approved future state into an executable delivery plan."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Control FDE Change"
+  short_description: "Assess, approve, test, and release changes safely"
+  default_prompt: "Use $fde-control-change to assess this request and prepare a governed change."

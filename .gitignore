@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.venv/
+
+# Engagement workspaces may contain confidential customer evidence.
+/fde/

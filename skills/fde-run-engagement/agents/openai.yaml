@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run FDE Engagement"
+  short_description: "Guide an evidence-backed FDE engagement"
+  default_prompt: "Use $fde-run-engagement to start or continue this client engagement."

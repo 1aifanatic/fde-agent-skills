@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reengineer FDE Process"
+  short_description: "Redesign work across AI, automation, and people"
+  default_prompt: "Use $fde-reengineer-process to map this process and design a safer future state."

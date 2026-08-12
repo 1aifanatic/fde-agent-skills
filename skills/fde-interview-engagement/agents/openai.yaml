@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interview FDE Engagement"
+  short_description: "Discover project knowledge and close gaps"
+  default_prompt: "Use $fde-interview-engagement to interview me and identify the knowledge this project still needs."
