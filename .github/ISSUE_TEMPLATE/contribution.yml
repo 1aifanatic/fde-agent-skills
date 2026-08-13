@@ -1,0 +1,71 @@
+name: Contribution proposal
+description: Propose a focused improvement to an FDE skill, example, guide, or validation tool.
+title: "[Proposal]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve FDE Agent Skills. Do not include customer data, credentials, personal data, or proprietary process details.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Contribution area
+      description: Select the primary area affected by this proposal.
+      options:
+        - Engagement orchestration
+        - Stakeholder interviewing
+        - Knowledge capture and provenance
+        - Process reengineering
+        - Delivery planning and testing
+        - Change control
+        - Synthetic worked examples
+        - Cloudflare application guide
+        - UiPath integration guidance
+        - Documentation or installation
+        - Validation, security, privacy, or accessibility
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: Explain the practitioner problem, gap, ambiguity, or failure mode.
+      placeholder: What is difficult today, and who is affected?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed contribution
+      description: Describe the focused change and the durable outcome it should produce.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and primary sources
+      description: Link public primary documentation or describe the synthetic evidence supporting the proposal.
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety, compatibility, and validation
+      description: Explain effects on provenance, lifecycle gates, permissions, privacy, compatibility, testing, and rollback.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched existing issues for duplicates.
+          required: true
+        - label: This proposal contains no credentials, customer data, unnecessary personal data, or proprietary process details.
+          required: true
+        - label: I will use synthetic or explicitly authorized evidence in any example.
+          required: true
+        - label: I read CONTRIBUTING.md and understand that substantial contract or lifecycle changes should be discussed before implementation.
+          required: true

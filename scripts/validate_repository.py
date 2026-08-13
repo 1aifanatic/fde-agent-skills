@@ -19,6 +19,10 @@ EXPECTED_SKILLS = {
 }
 EXPECTED_DOCS = {
     ROOT / "README.md",
+    ROOT / "CONTRIBUTING.md",
+    ROOT / ".github" / "pull_request_template.md",
+    ROOT / ".github" / "ISSUE_TEMPLATE" / "contribution.yml",
+    ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
     ROOT / "docs" / "INSTALLATION.md",
     ROOT / "docs" / "USER_GUIDE.md",
     ROOT / "docs" / "SCENARIOS.md",

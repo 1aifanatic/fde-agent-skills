@@ -38,6 +38,7 @@ SOURCES = [
     ("Part V — Skill execution evidence", ROOT / "examples" / "northstar-ap-transformation" / "run-log.md"),
     ("Part VI — Demonstrated impact", ROOT / "examples" / "northstar-ap-transformation" / "impact.md"),
     ("Part VII — Validation and reproducibility", ROOT / "docs" / "VALIDATION.md"),
+    ("Part VIII — Contributing", ROOT / "CONTRIBUTING.md"),
 ]
 
 
@@ -284,7 +285,7 @@ def configure_page(doc: Document) -> None:
     paragraph.paragraph_format.tab_stops.add_tab_stop(Inches(6.5), WD_TAB_ALIGNMENT.RIGHT)
     left = paragraph.add_run("FDE AGENT SKILLS HANDBOOK")
     set_run_font(left, size=8.5, color=MUTED, bold=True)
-    right = paragraph.add_run("\tPRIVATE REPOSITORY GUIDE")
+    right = paragraph.add_run("\tPUBLIC PROJECT GUIDE")
     set_run_font(right, size=8.5, color=MUTED)
 
     footer = section.footer
@@ -335,7 +336,7 @@ def add_cover(doc: Document) -> None:
     subtitle = doc.add_paragraph()
     subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
     subtitle.paragraph_format.space_after = Pt(28)
-    run = subtitle.add_run("Installation, Operating Model, Scenarios, and a Fully Worked Engagement")
+    run = subtitle.add_run("Installation, Operating Model, Scenarios, Worked Engagement, and Contributions")
     set_run_font(run, size=15, color=DARK_BLUE)
 
     statement = doc.add_paragraph()
@@ -350,7 +351,7 @@ def add_cover(doc: Document) -> None:
     set_run_font(run, size=11.5, color=INK)
 
     for label, value in (
-        ("Repository", "github.com/1aifanatic/fde-agent-skills (private)"),
+        ("Repository", "github.com/1aifanatic/fde-agent-skills (public)"),
         ("Suite", "6 interoperable skills and a 21-file engagement workspace"),
         ("Edition", f"Generated {date.today().isoformat()}"),
         ("Demonstration", "Synthetic Northstar AP transformation; no production claims"),
@@ -385,17 +386,18 @@ def add_contents(doc: Document) -> None:
         p,
         "Read Part I to install the skills. Use Part II while running engagements. "
         "Use Part III to explain the value to stakeholders. Parts IV–VI show the complete synthetic execution and its impact. "
-        "Part VII documents the reproducibility and validation evidence."
+        "Part VII documents the reproducibility and validation evidence. Part VIII explains how to contribute safely."
     )
 
     entries = [
-        ("Part I", "Install and verify the private repository"),
+        ("Part I", "Install and verify the public repository"),
         ("Part II", "Understand the operating model and use every skill"),
         ("Part III", "Compare before-and-after scenarios"),
         ("Part IV", "Orient to the synthetic Northstar AP engagement"),
         ("Part V", "Review the skill-by-skill execution record"),
         ("Part VI", "Understand demonstrated versus hypothesized impact"),
         ("Part VII", "Reproduce installation, skill, example, and document checks"),
+        ("Part VIII", "Propose, validate, and submit a safe contribution"),
     ]
     for label, description in entries:
         p = doc.add_paragraph(style="List Bullet")
