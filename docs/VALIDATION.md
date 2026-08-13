@@ -42,7 +42,7 @@ Get-ChildItem -LiteralPath .\skills -Directory | Sort-Object Name | ForEach-Obje
 
 Expected result: each of the six skills reports Skill is valid!.
 
-## Private npx installation smoke test
+## Public npx installation smoke test
 
 ### Tested environment
 
@@ -51,8 +51,8 @@ Expected result: each of the six skills reports Skill is valid!.
 - Node: v24.18.0
 - npm: 11.8.0
 - skills CLI: 1.5.22
-- Repository: private 1aifanatic/fde-agent-skills
-- Authentication: existing GitHub CLI/Git credentials
+- Repository: public 1aifanatic/fde-agent-skills
+- Authentication: none required for HTTPS installation
 - Telemetry: disabled
 - Installation scope: isolated temporary project
 - Target agent: Codex
@@ -62,16 +62,16 @@ Expected result: each of the six skills reports Skill is valid!.
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --list
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --list
 ~~~
 
-Observed result: the CLI cloned the private repository and found exactly six skills.
+Observed result: the CLI cloned the repository and found exactly six skills.
 
 ### Installation command
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
 ~~~
 
 Observed result: six skills installed under .agents/skills/. The installed tree included:

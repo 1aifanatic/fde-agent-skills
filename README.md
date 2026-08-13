@@ -2,13 +2,13 @@
 
 An evidence-backed operating system for forward deployed engineers. Use the six skills directly in Codex, or follow the optional Cloudflare guide to build a governed FDE application.
 
+> **Contributions are welcome.** Help improve the interview methods, evidence model, process-reengineering playbooks, delivery controls, examples, validation, or Cloudflare architecture. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
 ## Install all six skills
 
-This repository is private. Authenticate GitHub once, then run the install command:
+Run the public installation command:
 
 ```powershell
-gh auth status
-gh auth setup-git
 npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
 ```
 
@@ -18,7 +18,7 @@ Restart or reload Codex, then begin:
 $fde-run-engagement Start an engagement for Acme accounts payable. Interview me to define the outcome, scope, stakeholders, evidence, risks, and next action.
 ```
 
-> The install command requires Node.js/npm and GitHub access to `1aifanatic/fde-agent-skills`. See [Installation and troubleshooting](docs/INSTALLATION.md) if authentication or discovery fails.
+> The install command requires Node.js/npm. A GitHub account or access token is not required for this public repository. See [Installation and troubleshooting](docs/INSTALLATION.md) if discovery fails.
 
 ## Choose your path
 
@@ -32,6 +32,7 @@ $fde-run-engagement Start an engagement for Acme accounts payable. Interview me 
 | Review before/after scenarios | [Scenario guide](docs/SCENARIOS.md) | Generic examples across common FDE situations |
 | Validate this repository | [Validation guide](docs/VALIDATION.md) | Structural, link, example, and DOCX checks |
 | Share a Word manual | [FDE Agent Skills Handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx) | Detailed offline documentation for teams and stakeholders |
+| Improve the project | [Contribution guide](CONTRIBUTING.md) | Contribution areas, standards, tests, and pull-request checklist |
 
 ## What this repository contains
 
@@ -181,7 +182,7 @@ Remove `--global`:
 npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
 ```
 
-### Refresh a private-repository installation
+### Refresh an installation
 
 Re-running `add` is the most reliable way to rediscover all skills, including skills added to the repository later:
 
@@ -189,7 +190,7 @@ Re-running `add` is the most reliable way to rediscover all skills, including sk
 npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
 ```
 
-For SSH authentication, source the repository as `git@github.com:1aifanatic/fde-agent-skills.git`. The [installation guide](docs/INSTALLATION.md) covers prerequisites, authentication, verification, local installation, and troubleshooting.
+For SSH-based Git setups, source the repository as `git@github.com:1aifanatic/fde-agent-skills.git`. The [installation guide](docs/INSTALLATION.md) covers prerequisites, verification, local installation, and troubleshooting.
 
 ## What changes after adoption
 
@@ -244,6 +245,21 @@ It contains no customer data and makes no unverified production ROI claim.
 | [Cloudflare app build guide](docs/CLOUDFLARE_APP_BUILD_GUIDE.md) | Optional application architecture, implementation, security, and deployment |
 | [Validation](docs/VALIDATION.md) | Repository checks and known validation limits |
 | [Word handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx) | Detailed shareable manual in Microsoft Word format |
+| [Contributing](CONTRIBUTING.md) | How to propose, implement, test, and submit improvements |
+
+## Contributing
+
+Forward deployed engineering gets better when practitioners contribute real patterns without contributing real customer data. Useful contributions include:
+
+- sharper interview questions and knowledge-gap strategies;
+- stronger provenance, contradiction, identity, and confidence handling;
+- process-redesign examples that include exceptions and controls;
+- delivery, testing, release, rollback, and change-governance improvements;
+- additional synthetic worked examples from different business functions;
+- Cloudflare, UiPath, security, privacy, and observability corrections backed by primary sources;
+- accessibility, installation, documentation, and validation improvements.
+
+Start with [CONTRIBUTING.md](CONTRIBUTING.md), search [existing issues](https://github.com/1aifanatic/fde-agent-skills/issues), and open a focused proposal or pull request. Never submit customer documents, credentials, personal data, or proprietary process details.
 
 ## Safety model
 
@@ -280,6 +296,12 @@ The repository validator checks the six skill packages, internal Markdown links,
 ```text
 fde-agent-skills/
 |-- README.md
+|-- CONTRIBUTING.md
+|-- .github/
+|   |-- ISSUE_TEMPLATE/
+|   |   |-- contribution.yml
+|   |   `-- config.yml
+|   `-- pull_request_template.md
 |-- skills/
 |   |-- fde-run-engagement/
 |   |-- fde-interview-engagement/

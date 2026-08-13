@@ -1,6 +1,6 @@
 # Installation Guide
 
-This guide installs the private 1aifanatic/fde-agent-skills repository through the open skills CLI. The repository contains six independent skills that are discovered from their SKILL.md files.
+This guide installs the public 1aifanatic/fde-agent-skills repository through the open skills CLI. The repository contains six independent skills that are discovered from their SKILL.md files.
 
 ## Fast path for Codex
 
@@ -12,12 +12,9 @@ Confirm these commands work:
 node --version
 npx --version
 git --version
-gh --version
-gh auth status
-gh auth setup-git
 ~~~
 
-The GitHub account reported by gh auth status must have read access to the private repository.
+No GitHub account or access token is required for the public HTTPS installation.
 
 ### Install all skills globally
 
@@ -34,7 +31,7 @@ What each option means:
 | --- | --- |
 | npx --yes | Downloads/runs the CLI package without the npm confirmation prompt |
 | skills@latest | Uses the current released skills CLI |
-| add https://github.com/1aifanatic/fde-agent-skills.git | Reads the private GitHub repository through the configured Git credentials |
+| add https://github.com/1aifanatic/fde-agent-skills.git | Reads the public GitHub repository |
 | --skill '*' | Selects all six discovered skills |
 | --agent codex | Installs only for Codex |
 | --global | Installs for the current user rather than one project |
@@ -63,13 +60,13 @@ Restart or reload Codex after installation so the new skill metadata is discover
 $fde-run-engagement Start an FDE engagement and interview me to establish the charter.
 ~~~
 
-## Private-repository authentication
+## Alternative Git transports and CI
 
-The skills CLI supports private repositories by using existing Git, GitHub CLI, or SSH authentication.
+The recommended public HTTPS command requires no authentication. Use an alternate transport only when your environment requires it.
 
-### GitHub CLI authentication
+### Optional GitHub CLI authentication
 
-Recommended on developer machines:
+GitHub CLI authentication is optional and can help diagnose account-level network or rate-limit issues:
 
 ~~~powershell
 gh auth login
@@ -78,7 +75,7 @@ gh auth setup-git
 gh repo view 1aifanatic/fde-agent-skills
 ~~~
 
-Do not paste tokens into the install command. The CLI can use the authenticated GitHub CLI path without printing or copying the credential.
+Do not paste tokens into the install command or logs.
 
 ### SSH authentication
 
@@ -90,18 +87,16 @@ $env:DISABLE_TELEMETRY = "1"
 npx --yes skills@latest add git@github.com:1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
 ~~~
 
-### Explicit environment token
+### CI installation
 
-For a CI worker that cannot use gh or SSH, supply a short-lived, least-privilege token through the secret manager:
+Public CI workers can install without a repository token:
 
 ~~~powershell
-$env:GITHUB_TOKEN = $env:FDE_SKILLS_READ_TOKEN
 $env:DISABLE_TELEMETRY = "1"
 npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
-Remove-Item Env:GITHUB_TOKEN
 ~~~
 
-Never commit a token, place it in README output, or echo it in logs.
+If your organization requires authenticated GitHub access, inject a short-lived least-privilege token through its secret manager. Never commit or print it.
 
 ## Discover before installing
 
@@ -208,9 +203,9 @@ The CLI can install through a canonical copy plus symlinks or through independen
 
 Updates should still be performed through the skills CLI so the source lock and installed copies remain consistent.
 
-## Telemetry and private repositories
+## Telemetry
 
-The upstream CLI documents that GitHub repository and skill identifiers are sent only when GitHub confirms the repository is public. This repository is private. This guide still sets DISABLE_TELEMETRY=1 as a conservative default.
+The upstream CLI documents its telemetry behavior for public repositories. This guide sets DISABLE_TELEMETRY=1 as a conservative default; omit it if your organization permits the CLI's documented telemetry.
 
 Official sources:
 
@@ -221,11 +216,9 @@ Official sources:
 
 ### Repository cannot be found
 
-Check access independently:
+Check public access independently:
 
 ~~~powershell
-gh auth status
-gh repo view 1aifanatic/fde-agent-skills
 git ls-remote https://github.com/1aifanatic/fde-agent-skills.git
 ~~~
 
@@ -263,9 +256,9 @@ Add --copy, as shown in the recommended command.
 
 Review whether the existing directory contains user changes. Back it up, remove it intentionally through the CLI, and reinstall. Do not overwrite unknown local work silently.
 
-### CI installation
+### CI troubleshooting
 
-Use a secret-managed read token, project scope, --copy, --yes, and disabled telemetry. Review the installed skill source during the build, and avoid persisting credentials in artifacts or logs.
+Use project scope, --copy, --yes, and disabled telemetry. Review the installed skill source during the build. Add GitHub credentials only when required by organizational network or rate-limit policy, and never persist them in artifacts or logs.
 
 ## Manual fallback
 
