@@ -1,0 +1,5 @@
+# Change Log
+
+| ID | Date/requester | Request/source | Authority | Baseline | Impact/risk | Patch/test/rollback | Approvals | Release/evidence | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CHG-001 | 2026-08-11; Mira Patel | Route low-confidence missing-receipt cases from ap-exceptions@northstar.example to ap-triage@northstar.example; S-005 | Mira may request and approve process analysis; production release requires Sam Reed and UAT | FS-1 / DP-1 | Affects FS-05, FR-006, component C-004, T-004/T-008, access, runbook, monitoring; high routing risk R-005 | Patch routing config only after mailbox access check; test exact category/confidence boundary and end-to-end delivery; canary 10 cases; rollback to prior mailbox if any loss, unauthorized access, or >30-minute queue delay | Analysis and sandbox patch covered by APR-003; production APR-004 pending | No implementation, UAT, release, or production evidence | approved for sandbox implementation; production blocked |
