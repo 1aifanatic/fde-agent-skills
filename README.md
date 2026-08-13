@@ -1,370 +1,313 @@
 # FDE Agent Skills
 
-A practical, evidence-backed operating system for forward deployed engineers. Install six reusable AI-agent skills and run discovery, knowledge capture, process redesign, delivery planning, and controlled change directly inside Codex—without building or maintaining a custom web application.
+An evidence-backed operating system for forward deployed engineers. Use the six skills directly in Codex, or follow the optional Cloudflare guide to build a governed FDE application.
 
-> **Repository status:** private. Installation requires GitHub access to 1aifanatic/fde-agent-skills. The commands below were verified against this repository on August 12, 2026.
+## Install all six skills
 
-## Install in one command
+This repository is private. Authenticate GitHub once, then run the install command:
 
-First make sure GitHub CLI can access the private repository:
-
-~~~powershell
+```powershell
 gh auth status
-~~~
+gh auth setup-git
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
+```
 
-Then install all six skills globally for Codex:
+Restart or reload Codex, then begin:
 
-~~~powershell
-$env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --global --copy --yes
-~~~
-
-Restart or reload Codex. Then start an engagement:
-
-~~~text
+```text
 $fde-run-engagement Start an engagement for Acme accounts payable. Interview me to define the outcome, scope, stakeholders, evidence, risks, and next action.
-~~~
+```
 
-That is the entire minimum setup.
-
-## What you get
-
-| Skill | Use it when you need to | Durable result |
-| --- | --- | --- |
-| [fde-run-engagement](skills/fde-run-engagement/SKILL.md) | Start, resume, or govern an FDE engagement | Charter, lifecycle status, gates, handoff, and next action |
-| [fde-interview-engagement](skills/fde-interview-engagement/SKILL.md) | Discover requirements, exceptions, authority, metrics, controls, or adoption constraints | Prioritized questions and an owned knowledge plan |
-| [fde-capture-knowledge](skills/fde-capture-knowledge/SKILL.md) | Turn notes, documents, transcripts, diagrams, and observations into reliable context | Evidence index, glossary, claims, identities, contradictions, and coverage |
-| [fde-reengineer-process](skills/fde-reengineer-process/SKILL.md) | Map actual work and redesign it around the right mix of people, rules, RPA, APIs, and AI | Current state, exception model, allocation decisions, and approved future state |
-| [fde-plan-delivery](skills/fde-plan-delivery/SKILL.md) | Convert an approved design into executable delivery work | Requirements, architecture responsibilities, backlog, tests, traceability, runbook, and release gates |
-| [fde-control-change](skills/fde-control-change/SKILL.md) | Assess an email, enhancement, configuration request, defect, or production change | Attributable change record, impact, approvals, test plan, release evidence, and rollback |
-
-The skills share one durable Markdown workspace named fde/. That workspace replaces the fragile pattern where the only complete project context lives in meetings, chat history, or one FDE's memory.
+> The install command requires Node.js/npm and GitHub access to `1aifanatic/fde-agent-skills`. See [Installation and troubleshooting](docs/INSTALLATION.md) if authentication or discovery fails.
 
 ## Choose your path
 
-| I want to... | Start here |
-| --- | --- |
-| Install in Codex | [Installation guide](docs/INSTALLATION.md) |
-| Understand why this exists | [Why and operating model](docs/USER_GUIDE.md#why-use-this-suite) |
-| Start my first engagement | [Ten-minute quick start](#ten-minute-quick-start) |
-| Know which skill to invoke | [Skill router](docs/USER_GUIDE.md#skill-router) |
-| See before-and-after examples | [Scenario guide](docs/SCENARIOS.md) |
-| Inspect a complete execution | [Northstar AP worked example](examples/northstar-ap-transformation/README.md) |
-| Verify the repository | [Validation guide](docs/VALIDATION.md) |
-| Read the full Word manual | [FDE Agent Skills Handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx) |
+| Your goal | Start here | What you get |
+| --- | --- | --- |
+| Use the FDE agent now | [Install the skills](#install-all-six-skills) | Six reusable skills; no application infrastructure required |
+| Run your first engagement | [Five-minute workflow](#five-minute-workflow) | A governed Markdown workspace and a clear next action |
+| Understand the complete method | [User guide](docs/USER_GUIDE.md) | Operating model, prompts, lifecycle, roles, and guardrails |
+| See the impact before adopting | [Worked example](examples/northstar-ap-transformation/README.md) | A complete synthetic AP transformation with outputs and run log |
+| Build a team application | [Cloudflare app build guide](docs/CLOUDFLARE_APP_BUILD_GUIDE.md) | Architecture and step-by-step deployment instructions |
+| Review before/after scenarios | [Scenario guide](docs/SCENARIOS.md) | Generic examples across common FDE situations |
+| Validate this repository | [Validation guide](docs/VALIDATION.md) | Structural, link, example, and DOCX checks |
+| Share a Word manual | [FDE Agent Skills Handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx) | Detailed offline documentation for teams and stakeholders |
 
-## Why use this suite
+## What this repository contains
 
-Strong models can execute tasks. The harder problem in forward deployed engineering is deciding which task is real, how the customer's work actually behaves, what happens when it fails, which controls and authorities apply, what should be automated, and what evidence is sufficient to release safely.
+There are two ways to use the work:
 
-Without a disciplined engagement layer, common failure modes are:
+1. **Skills-only path — recommended first.** Install the skills with the command above and use them from Codex. The project record is a portable `fde/` Markdown workspace.
+2. **Cloudflare application path — optional.** Build a shared web application when you need centralized authentication, durable multi-engagement state, evidence storage, approvals, audit, deployment controls, and UiPath adapters.
 
-- a polished summary that loses source traceability;
-- a process map that describes only the happy path;
-- AI added to a broken process without simplifying it first;
-- requirements that cannot be traced to evidence, tests, or approvals;
-- one stakeholder's preference becoming an undocumented project decision;
-- a customer email being treated as direct production authority;
-- ROI claims made before a baseline or production measurement exists;
-- project context disappearing when an FDE changes assignment.
+The Cloudflare document is an implementation guide, not a prebuilt or already deployed application. The skills work independently of it.
 
-This suite makes those failure modes visible. It does not make business decisions for stakeholders or grant itself production authority.
+## The six skills
 
-## What happens when you use it
+| Skill | Invoke it for | Main output |
+| --- | --- | --- |
+| [`fde-run-engagement`](skills/fde-run-engagement/SKILL.md) | Start, resume, route, or govern an engagement | Charter, lifecycle, gates, handoff, next action |
+| [`fde-interview-engagement`](skills/fde-interview-engagement/SKILL.md) | Interview process owners, SMEs, controls, delivery teams, or the FDE | Prioritized questions, decisions, gaps, knowledge plan |
+| [`fde-capture-knowledge`](skills/fde-capture-knowledge/SKILL.md) | Convert notes, documents, transcripts, diagrams, and observations into reliable context | Evidence index, claims, glossary, identities, conflicts, coverage |
+| [`fde-reengineer-process`](skills/fde-reengineer-process/SKILL.md) | Map real work and design the future state | Current state, exceptions, allocation decisions, approved future state |
+| [`fde-plan-delivery`](skills/fde-plan-delivery/SKILL.md) | Turn an approved future state into executable delivery | Requirements, architecture, backlog, tests, traceability, runbook, release gates |
+| [`fde-control-change`](skills/fde-control-change/SKILL.md) | Govern post-baseline or post-release requests | Change record, authority check, impact, tests, approval, rollback |
 
-The orchestrator creates or resumes a structured workspace:
+## How the skills fit together
 
-~~~text
+```text
+Frame engagement
+      |
+      v
+Interview stakeholders <----> Capture and reconcile evidence
+      |                                  |
+      +---------------+------------------+
+                      v
+            Map the current state
+                      |
+                      v
+          Approve the current baseline
+                      |
+                      v
+             Redesign around AI,
+        rules, APIs, RPA, HITL, people
+                      |
+                      v
+           Approve the future state
+                      |
+                      v
+      Plan, test, release, and operate
+                      |
+                      v
+          Control subsequent changes
+```
+
+The skills do not force a purely linear conversation. Interviewing and knowledge capture repeat until important gaps and contradictions are resolved. Approval gates stop unconfirmed assumptions from silently becoming delivery facts.
+
+## Five-minute workflow
+
+### 1. Create the engagement
+
+```text
+$fde-run-engagement Start an engagement for Contoso order management.
+Interview me before recommending a solution.
+```
+
+The orchestrator creates or resumes this portable structure:
+
+```text
 fde/
-  engagement/
-    charter.md
-    status.md
-  knowledge/
-    evidence-index.md
-    glossary.md
-    stakeholders.md
-    knowledge-needs.md
-    contradictions.md
-  process/
-    current-state.md
-    automation-allocation.md
-    future-state.md
-  delivery/
-    requirements.md
-    architecture.md
-    backlog.md
-    traceability.md
-    test-plan.md
-    runbook.md
-  governance/
-    decisions.md
-    risks-controls.md
-    approvals.md
-    change-log.md
-  handoff.md
-~~~
+|-- engagement/
+|-- knowledge/
+|-- discovery/
+|-- process/
+|-- design/
+|-- delivery/
+|-- testing/
+|-- release/
+|-- change/
+|-- operations/
+`-- handoff/
+```
 
-As work progresses:
+### 2. Discover what matters
 
-1. Claims are separated from confirmed facts and approved decisions.
-2. Every material claim keeps a source and locator.
-3. Interview questions target decisions and evidence gaps, not generic discovery theater.
-4. The actual process includes exception paths, retries, queues, handoffs, controls, and workarounds.
-5. Each step is allocated to elimination, simplification, deterministic automation, RPA/API workflow, agentic AI, human-in-the-loop, or human-only work.
-6. The approved future state becomes requirements, components, backlog items, tests, release gates, and rollback.
-7. Later requests are reconciled against the approved baseline before implementation.
-8. A fresh agent can resume from files without depending on the original conversation.
+```text
+$fde-interview-engagement Interview the order-management process owner.
+Focus on exceptions, handoffs, authority, controls, volumes, service levels,
+failure handling, and measurable outcomes.
+```
 
-## Ten-minute quick start
+### 3. Reconcile evidence
 
-### 1. Open the project directory in Codex
+```text
+$fde-capture-knowledge Reconcile the interview notes, SOPs, tickets, and system observations.
+Separate sourced fact, stakeholder assertion, inference, proposal, and decision.
+Show contradictions and unresolved identity questions.
+```
 
-Use a dedicated customer or engagement repository. Keep customer engagements separated from each other.
+### 4. Redesign the process
 
-### 2. Invoke the orchestrator
+```text
+$fde-reengineer-process Map the real current state, including rework and escalation loops.
+Then classify each future-state step as eliminate, simplify, deterministic automation,
+API, RPA, agentic AI, human-in-the-loop, or human-only.
+Do not cross an approval gate without named approval.
+```
 
-~~~text
-$fde-run-engagement Start a new engagement named "Contoso Order Exception Transformation". Interview me before proposing a solution.
-~~~
+### 5. Plan delivery
 
-If no workspace exists, the skill asks for the engagement name and initializes fde/.
+```text
+$fde-plan-delivery Convert the approved future state into requirements, architecture
+responsibilities, a session-sized backlog, acceptance tests, traceability,
+release gates, rollback, and an operating runbook.
+```
 
-### 3. Supply the smallest useful context
+### 6. Govern later changes
 
-Provide what you already know:
+```text
+$fde-control-change Assess this routing-change request.
+Verify the requester's authority, reconcile it with the approved baseline,
+show impact and regression scope, and require approval before release.
+```
 
-- business problem and desired outcome;
-- process or department in scope;
-- sponsor, process owner, control owner, technical owner, and performers;
-- available SOPs, transcripts, diagrams, exports, code, or system access;
-- baseline volume, cycle time, error, rework, SLA, cost, revenue, or risk;
-- constraints such as system-of-record, security, privacy, compliance, timeline, and adoption;
-- known exceptions or failures.
+## Install options
 
-The interview skill finds the next knowledge frontier. You do not need to prepare a perfect requirements document.
+### Recommended: global Codex installation
 
-### 4. Answer interview rounds
+Use the complete command shown at the top of this README:
 
-A round normally contains four to eight questions. Each question states what it unlocks. If the agent can discover an environmental fact through authorized read-only inspection, it should inspect rather than ask you.
+```powershell
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
+```
 
-### 5. Review the durable files
+### Preview what the CLI discovers
 
-After each material turn, inspect:
+```powershell
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --list
+```
 
-- fde/engagement/status.md for stage, blockers, and next action;
-- fde/knowledge/knowledge-needs.md for open questions and owners;
-- fde/knowledge/contradictions.md for conflicting accounts;
-- fde/governance/decisions.md and approvals.md for authority;
-- fde/handoff.md before another person or agent resumes.
+### Install only one skill
 
-### 6. Advance only when the gate is satisfied
+```powershell
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill fde-run-engagement --agent codex --global --copy --yes
+```
 
-A stage is not complete because a meeting ended or a document was generated. It is complete when gate-critical facts are evidenced, decisions are approved, contradictions are owned or resolved, and the next state is durable.
+### Install for the current project
 
-## Typical engagement flow
+Remove `--global`:
 
-~~~text
-Raw evidence
-    |
-    v
-Interview the decision frontier
-    |
-    v
-Capture sources, claims, identities, and contradictions
-    |
-    v
-Map actual work, exceptions, controls, and measures
-    |
-    v
-Allocate each step to the safest useful mechanism
-    |
-    v
-Approve a measurable future-state baseline
-    |
-    v
-Plan requirements, components, tests, rollout, and rollback
-    |
-    v
-Implement through the official product/artifact skill
-    |
-    v
-Control post-baseline and production changes
-~~~
+```powershell
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
+```
 
-The flow is iterative. New evidence can invalidate part of the design. The skills preserve that history instead of silently rewriting it.
+### Refresh a private-repository installation
 
-## Before and after
+Re-running `add` is the most reliable way to rediscover all skills, including skills added to the repository later:
+
+```powershell
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
+```
+
+For SSH authentication, source the repository as `git@github.com:1aifanatic/fde-agent-skills.git`. The [installation guide](docs/INSTALLATION.md) covers prerequisites, authentication, verification, local installation, and troubleshooting.
+
+## What changes after adoption
 
 | Before | After |
 | --- | --- |
-| “Automate invoice exceptions” | A bounded outcome, baseline, owner, non-goals, five exception families, and explicit controls |
-| A 150-page document dump | Indexed sources with atomic claims and exact locators |
-| Generic stakeholder questionnaire | Questions ordered by the decisions they unlock |
-| Happy-path process map | Normal flow, failure branches, rework loops, wait states, workarounds, and escalations |
-| “Use AI for the workflow” | Step-by-step allocation among simplification, rules, RPA/API, AI, HITL, and human-only |
-| Backlog disconnected from discovery | Requirement-to-design-to-component-to-test-to-release traceability |
-| Customer email becomes a hotfix | Authorized change record with impact, approval, UAT, monitoring, and rollback |
-| Handoff meeting required | Fresh-agent resumability from fde/handoff.md and engagement status |
+| Project context is scattered across calls, inboxes, chat, and personal notes | Evidence, claims, decisions, conflicts, and gaps have durable locations |
+| Process maps describe the happy path | Exceptions, rework, queues, escalations, and failure handling are explicit |
+| A model receives a large document dump | Retrieval is driven by the active decision and backed by citations |
+| AI is added to every step | Each step is deliberately allocated to people, rules, APIs, RPA, AI, or HITL |
+| Requirements drift away from evidence and tests | Requirements trace to sources, implementation, acceptance, and release evidence |
+| A stakeholder message can become an undocumented production change | Authority, impact, approval, regression, release, and rollback are governed |
+| Handoffs depend on one engineer's memory | A new engineer can resume from the workspace and handoff record |
 
-For detailed examples in finance, support, onboarding, and operations, see [docs/SCENARIOS.md](docs/SCENARIOS.md).
+Read the complete [before-and-after scenarios](docs/SCENARIOS.md) or inspect the [Northstar AP worked example](examples/northstar-ap-transformation/README.md).
 
-## Proven example
+## Optional Cloudflare application
 
-The [Northstar AP transformation](examples/northstar-ap-transformation/README.md) is a synthetic, fully worked execution of all six skills.
+Use the [Cloudflare app build and deployment guide](docs/CLOUDFLARE_APP_BUILD_GUIDE.md) when a team needs a centralized control plane. It covers:
 
-It includes:
+- Workers and the Cloudflare Agents SDK;
+- one isolated Agent/Durable Object per engagement;
+- D1, embedded SQLite, R2, AI Search, Queues, and Workflows;
+- Cloudflare Access and application-level authorization;
+- evidence provenance, lifecycle gates, audit, and versioning;
+- UiPath execution adapters with least privilege;
+- testing, observability, CI/CD, deployment, recovery, and rollback;
+- a synthetic AP vertical slice and definition of done.
 
-- five fictional source documents;
-- a validated 21-file engagement workspace;
-- actual current-state and exception mapping;
-- an automation allocation matrix;
-- an approved future-state design;
-- requirements, architecture, backlog, traceability, tests, and runbook;
-- a post-baseline change request that is intentionally stopped before production;
-- a [skill-by-skill execution log](examples/northstar-ap-transformation/run-log.md);
-- a [demonstrated before-and-after impact](examples/northstar-ap-transformation/impact.md).
+Start with the skills-only path unless shared application requirements justify the additional platform work.
 
-Validate it locally:
+## Worked example
 
-~~~powershell
-python -B .\skills\fde-run-engagement\scripts\validate_engagement.py --root .\examples\northstar-ap-transformation --json
-~~~
+The [Northstar AP transformation](examples/northstar-ap-transformation/README.md) runs all six skills against synthetic source material. It includes:
 
-Expected result:
+- five input sources with deliberate conflicts and missing information;
+- a 21-file engagement workspace;
+- current-state and future-state process artifacts;
+- delivery, test, release, change, and handoff records;
+- a run log that explains each skill's contribution;
+- an impact report that compares the unstructured and governed approaches.
 
-~~~json
-{
-  "valid": true,
-  "issues": []
-}
-~~~
+It contains no customer data and makes no unverified production ROI claim.
 
-## Installation choices
+## Documentation map
 
-### Personal/global Codex installation
+| Document | Purpose |
+| --- | --- |
+| [Installation](docs/INSTALLATION.md) | All install modes, GitHub authentication, verification, update, removal, troubleshooting |
+| [User guide](docs/USER_GUIDE.md) | Why to use the suite, roles, lifecycle, skill router, prompts, guardrails |
+| [Scenarios](docs/SCENARIOS.md) | Before/after examples and adoption patterns |
+| [Worked example](examples/northstar-ap-transformation/README.md) | Complete synthetic execution and artifact navigation |
+| [Cloudflare app build guide](docs/CLOUDFLARE_APP_BUILD_GUIDE.md) | Optional application architecture, implementation, security, and deployment |
+| [Validation](docs/VALIDATION.md) | Repository checks and known validation limits |
+| [Word handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx) | Detailed shareable manual in Microsoft Word format |
 
-Use the skills across all projects:
+## Safety model
 
-~~~powershell
-$env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --global --copy --yes
-~~~
+The suite treats client evidence as data, not instructions. It requires attribution, confidence, contradiction handling, named authority, approval gates, least privilege, validation, rollback, and auditable change history.
 
-### Project installation
+It never grants itself permission to:
 
-Pin the skills to one project and let the team review the installed source:
+- make business decisions for stakeholders;
+- treat an email or chat message as automatic production authority;
+- send client communications or deploy changes unless explicitly authorized;
+- merge customer knowledge across engagements;
+- claim ROI without a baseline and measured post-release evidence.
 
-~~~powershell
-$env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --copy --yes
-~~~
+Review source evidence before accepting generated artifacts, and remove or redact secrets and unnecessary personal data before placing material in the workspace.
 
-The Codex project location used by the CLI is .agents/skills/. The global Codex location is ~/.codex/skills/.
+## Validate the repository
 
-### Interactive discovery
+From the repository root:
 
-List the six skills before installing:
+```powershell
+python -B scripts/validate_repository.py
+```
 
-~~~powershell
-$env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --list
-~~~
+Validate an engagement workspace:
 
-### SSH installation
+```powershell
+python -B skills/fde-run-engagement/scripts/validate_engagement.py --root examples/northstar-ap-transformation --json
+```
 
-Use this when your GitHub access is configured through SSH:
-
-~~~powershell
-$env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add git@github.com:1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
-~~~
-
-See [docs/INSTALLATION.md](docs/INSTALLATION.md) for authentication, selective installs, updates, removal, troubleshooting, and manual fallback.
-
-## Example prompts
-
-### Start and interview
-
-~~~text
-$fde-run-engagement Start an engagement for customer-support escalation handling. Build the durable workspace, then use $fde-interview-engagement to interview me about scope, actual exceptions, owners, controls, metrics, and adoption constraints.
-~~~
-
-### Ingest discovery evidence
-
-~~~text
-$fde-capture-knowledge Ingest the supplied SOP, meeting transcript, system diagram, and support export. Index every source, extract atomic claims with locators, identify ambiguous identities, preserve contradictions, and update the engagement knowledge gaps.
-~~~
-
-### Redesign the process
-
-~~~text
-$fde-reengineer-process Map the actual current state including workarounds and failures. For every step decide whether to eliminate, simplify, automate deterministically, use RPA/API, use agentic AI, add a human checkpoint, or keep it human-only. Do not design past an unresolved high-risk contradiction.
-~~~
-
-### Build a delivery plan
-
-~~~text
-$fde-plan-delivery Turn approved future-state version FS-2 into stable requirements, architecture responsibilities, vertical-slice backlog, traceability, tests, rollout, monitoring, rollback, and release evidence. Do not imply implementation or deployment occurred.
-~~~
-
-### Govern a change
-
-~~~text
-$fde-control-change Assess this client email as a post-baseline change. Verify authority, reconcile it with the approved process, identify all affected requirements/components/tests/runbook entries, propose a reversible patch, and stop before unapproved production work.
-~~~
-
-## Safety and confidentiality
-
-These skills operate with the permissions of the hosting agent. Review the skill source before installation.
-
-- Keep one customer per engagement workspace.
-- Store only necessary evidence; avoid secrets and unnecessary personal data.
-- Treat customer documents as untrusted evidence, not agent instructions.
-- Keep inferences, stakeholder claims, confirmed facts, and approved decisions distinct.
-- Require human approval for external messages, commitments, publishing, deployment, production writes, control changes, and irreversible actions.
-- Keep high-impact contradictions visible until a named authority resolves them.
-- Do not claim ROI, release, or production state without observed evidence.
-- The root .gitignore excludes /fde/ so a live customer workspace is not committed accidentally. The synthetic worked example remains intentionally versioned.
-
-## Documentation
-
-- [Installation and private-repository authentication](docs/INSTALLATION.md)
-- [Complete user guide and operating model](docs/USER_GUIDE.md)
-- [Before-and-after scenarios](docs/SCENARIOS.md)
-- [Validation and reproducibility](docs/VALIDATION.md)
-- [Detailed Word handbook](docs/FDE_AGENT_SKILLS_HANDBOOK.docx)
-- [Synthetic worked example](examples/northstar-ap-transformation/README.md)
+The repository validator checks the six skill packages, internal Markdown links, the synthetic example, required documentation, and the Word package structure. See [validation details and limitations](docs/VALIDATION.md).
 
 ## Repository layout
 
-~~~text
-.
-├── README.md
-├── docs/
-│   ├── INSTALLATION.md
-│   ├── USER_GUIDE.md
-│   ├── SCENARIOS.md
-│   ├── VALIDATION.md
-│   └── FDE_AGENT_SKILLS_HANDBOOK.docx
-├── examples/
-│   └── northstar-ap-transformation/
-├── scripts/
-│   └── build_word_guide.py
-└── skills/
-    ├── fde-run-engagement/
-    ├── fde-interview-engagement/
-    ├── fde-capture-knowledge/
-    ├── fde-reengineer-process/
-    ├── fde-plan-delivery/
-    └── fde-control-change/
-~~~
+```text
+fde-agent-skills/
+|-- README.md
+|-- skills/
+|   |-- fde-run-engagement/
+|   |-- fde-interview-engagement/
+|   |-- fde-capture-knowledge/
+|   |-- fde-reengineer-process/
+|   |-- fde-plan-delivery/
+|   `-- fde-control-change/
+|-- docs/
+|   |-- INSTALLATION.md
+|   |-- USER_GUIDE.md
+|   |-- SCENARIOS.md
+|   |-- CLOUDFLARE_APP_BUILD_GUIDE.md
+|   |-- VALIDATION.md
+|   `-- FDE_AGENT_SKILLS_HANDBOOK.docx
+|-- examples/
+|   `-- northstar-ap-transformation/
+`-- scripts/
+    |-- build_word_guide.py
+    `-- validate_repository.py
+```
 
-## Upstream references
+## Recommended adoption sequence
 
-- [skills CLI documentation](https://www.skills.sh/docs/cli)
-- [skills CLI source and private-repository behavior](https://github.com/vercel-labs/skills)
-- [Codex use cases: save repeatable workflows as skills](https://developers.openai.com/codex/use-cases)
+1. Install all six skills.
+2. Run the synthetic worked example with your team.
+3. Pilot one bounded, reversible engagement.
+4. Review the artifacts with an experienced FDE and control owner.
+5. Refine terminology and gates without weakening provenance.
+6. Build the optional Cloudflare application only when centralized team operation is needed.
 
-## Important limitation
-
-This suite strengthens discovery, design, traceability, and governance. It does not replace domain experts, product-specific implementation skills, security review, testing, UAT, release approval, or production monitoring. Its output quality depends on the quality and authority of the evidence supplied.
+The governing principle is simple: automate execution only after the team understands the business, evidence, exceptions, authority, and controls.

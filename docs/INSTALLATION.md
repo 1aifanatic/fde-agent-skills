@@ -14,6 +14,7 @@ npx --version
 git --version
 gh --version
 gh auth status
+gh auth setup-git
 ~~~
 
 The GitHub account reported by gh auth status must have read access to the private repository.
@@ -24,7 +25,7 @@ Use this for an FDE who wants the suite available in every Codex workspace:
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --global --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --global --copy --yes
 ~~~
 
 What each option means:
@@ -33,7 +34,7 @@ What each option means:
 | --- | --- |
 | npx --yes | Downloads/runs the CLI package without the npm confirmation prompt |
 | skills@latest | Uses the current released skills CLI |
-| add 1aifanatic/fde-agent-skills | Reads the private GitHub repository |
+| add https://github.com/1aifanatic/fde-agent-skills.git | Reads the private GitHub repository through the configured Git credentials |
 | --skill '*' | Selects all six discovered skills |
 | --agent codex | Installs only for Codex |
 | --global | Installs for the current user rather than one project |
@@ -49,7 +50,7 @@ Run from the project root:
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
 ~~~
 
 The project destination is .agents/skills/. Project installation is useful when the project should pin, review, and share the skill source with the delivery team.
@@ -73,6 +74,7 @@ Recommended on developer machines:
 ~~~powershell
 gh auth login
 gh auth status
+gh auth setup-git
 gh repo view 1aifanatic/fde-agent-skills
 ~~~
 
@@ -95,7 +97,7 @@ For a CI worker that cannot use gh or SSH, supply a short-lived, least-privilege
 ~~~powershell
 $env:GITHUB_TOKEN = $env:FDE_SKILLS_READ_TOKEN
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
 Remove-Item Env:GITHUB_TOKEN
 ~~~
 
@@ -107,7 +109,7 @@ List what the CLI finds:
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --list
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --list
 ~~~
 
 Expected skill names:
@@ -127,7 +129,7 @@ The suite is designed to work together, so installing all six is recommended. Fo
 
 ~~~powershell
 $env:DISABLE_TELEMETRY = "1"
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill fde-interview-engagement --skill fde-capture-knowledge --agent codex --global --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill fde-interview-engagement --skill fde-capture-knowledge --agent codex --global --copy --yes
 ~~~
 
 Important dependency guidance:
@@ -234,7 +236,7 @@ If HTTPS fails but SSH is configured, use the SSH installation command.
 Specify Codex explicitly:
 
 ~~~powershell
-npx --yes skills@latest add 1aifanatic/fde-agent-skills --skill '*' --agent codex --copy --yes
+npx --yes skills@latest add https://github.com/1aifanatic/fde-agent-skills.git --skill '*' --agent codex --copy --yes
 ~~~
 
 ### Skills installed but not visible

@@ -22,6 +22,7 @@ EXPECTED_DOCS = {
     ROOT / "docs" / "INSTALLATION.md",
     ROOT / "docs" / "USER_GUIDE.md",
     ROOT / "docs" / "SCENARIOS.md",
+    ROOT / "docs" / "CLOUDFLARE_APP_BUILD_GUIDE.md",
     ROOT / "docs" / "VALIDATION.md",
     ROOT / "docs" / "FDE_AGENT_SKILLS_HANDBOOK.docx",
 }
