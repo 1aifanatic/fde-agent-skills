@@ -9,7 +9,11 @@ Thank you for helping make forward deployed engineering more rigorous, reusable,
 3. For a new skill, workspace-contract change, lifecycle-gate change, or large redesign, open an issue first so the behavior and migration impact can be discussed.
 4. Use only synthetic, anonymized, or explicitly authorized material.
 
-This repository does not currently include a software license. Public visibility permits review and contribution discussion but does not by itself grant reuse rights. If licensing affects a proposed contribution, raise it before doing substantial work.
+## Licensing
+
+This repository is licensed under the [Apache License 2.0](LICENSE). Unless you state otherwise in writing, any contribution you intentionally submit for inclusion is licensed under the same terms, per section 5 of that license. No separate CLA is required.
+
+If you contribute on behalf of an employer or another organization, confirm you are authorized to license the work that way, and disclose the affiliation in the issue or pull request.
 
 ## Useful contribution areas
 

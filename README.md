@@ -333,3 +333,7 @@ fde-agent-skills/
 6. Build the optional Cloudflare application only when centralized team operation is needed.
 
 The governing principle is simple: automate execution only after the team understands the business, evidence, exceptions, authority, and controls.
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE). Contributions are accepted under the same terms; see [CONTRIBUTING.md](CONTRIBUTING.md).
